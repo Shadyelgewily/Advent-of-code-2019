@@ -69,10 +69,11 @@ class fuel_management_circuit():
         else:
             return False
         
-    def are_wirepieces_parallel(self):
+    def are_wirepieces_parallel(self, wirepiece1, wirepiece2):
+        if( wirepiece1.direction )
         pass
     
-    def are_wirepieces_overlapping(self):
+    def are_wirepieces_overlapping(self): 
         pass
     
     def find_intersection_if_perpendicular_directions(self, 
@@ -109,6 +110,7 @@ class fuel_management_circuit():
         
         return(is_on_wirepiece)
 
+    #Todo: is_coordinate_on_horizontal/vertical_wirepiece violate the DNRY principle
     def is_coordinate_on_horizontal_wirepiece(self, coordinate, start_position_wire, end_position_wire ):
         min_x = min( start_position_wire[0], end_position_wire[0] )
         max_x = max( start_position_wire[0], end_position_wire[0] )
