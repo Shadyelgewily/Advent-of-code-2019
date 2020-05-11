@@ -32,7 +32,10 @@ class monotoring_station():
         self.best_station_location = self.asteroid_locations[self.best_station_index]
         self.N_visible_at_best_location = np.max(self.N_visible_asteroids)
         self.set_asteroid_directions_from_station()
-        
+    
+    def set_asteroid_directions_from_station(self):
+        self.asteroid_directions_from_station = self.direction_vectors[self.best_station_index] 
+    
     #unique normalized direction vectors are visible
     def count_visible_asteroids_from_all(self):
         self.N_visible_asteroids = [ len(np.unique(self.normalized_direction_vectors[i],axis=0)) 
@@ -58,22 +61,7 @@ class monotoring_station():
            return v
         #to avoid issues with float comparisons, we round off
         return np.round( v / norm, 3 );
-    
-    def calc_distance_from_origin(self, v):
-        return(np.linalg.norm(v))
-        
-    def find_vaporize_order(self):
-        #Maybe something with itertools groupby, because we can group by angle and sort on distance
-        pass
-    
-    def calc_angles_from_station(self):
-        angles = [ self.calc_angle_12oclock(v) for v in self.asteroid_directions_from_station]
-        self.asteroid_angles_from_station = angles
-    
-    def calc_distances_from_station(self):
-        distances = [ self.calc_distance_from_origin(v) for v in self.asteroid_directions_from_station ]
-        self.asteroid_distances_from_station = distances
-    
+
     #Refactoring needed
     def set_df_laser_instructions(self):
         other_asteroid_coordinates = np.array([self.calc_position_from_dir_to_station(d) 
@@ -89,8 +77,16 @@ class monotoring_station():
         self.df_laser_instructions['angle'] = self.asteroid_angles_from_station
         self.df_laser_instructions['distance'] = self.asteroid_distances_from_station
         self.df_laser_instructions.sort_values(['angle', 'distance' ], inplace=True)
-        self.add_angle_occurence_to_laser_instructions()
+        self.add_angle_ith_occurence_to_laser_instructions()
         self.df_laser_instructions.sort_values(['ith_occurrence', 'angle'], inplace=True) 
+    
+    def calc_angles_from_station(self):
+        angles = [ self.calc_angle_12oclock(v) for v in self.asteroid_directions_from_station]
+        self.asteroid_angles_from_station = angles
+    
+    def calc_distances_from_station(self):
+        distances = [ self.calc_distance_from_origin(v) for v in self.asteroid_directions_from_station ]
+        self.asteroid_distances_from_station = distances
         
     def calc_angle_12oclock(self, v):
         #Station is at origin, Up is +, right is +
@@ -98,15 +94,15 @@ class monotoring_station():
         angle = angle if angle >= 0 else 360 + angle
         return( np.round(angle,5) )
     
-    def add_angle_occurence_to_laser_instructions(self):
+    def calc_distance_from_origin(self, v):
+        return(np.linalg.norm(v))
+        
+    def add_angle_ith_occurence_to_laser_instructions(self):
         angles = self.df_laser_instructions['angle']
         counter = enumerate(angles)
         ith_occurrence = [np.sum(angles[:(i+1)] == elem) for i, elem in counter]
         self.df_laser_instructions['ith_occurrence' ] = ith_occurrence
         
-    def set_asteroid_directions_from_station(self):
-        self.asteroid_directions_from_station = self.direction_vectors[self.best_station_index] 
-    
     #Something goes wrong here
     def calc_position_from_dir_to_station(self, direction):
         return( self.best_station_location + direction)
