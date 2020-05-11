@@ -41,7 +41,9 @@ orbits_obj.N_edges_shortest_path
 image = image_decoder('Input/day8_part1.txt', 25, 6 )
 image.display_decoded_image()
 
-#Day 10
+#Day 10 (something goes wrong with the coordinates still)
 station_finder = monotoring_station('Input/day10_part1.txt' )
 station_finder.find_best_station_location()
-print(station_finder.N_visible_at_best_location)
+print(station_finder.N_visible_at_best_location) #part1
+station_finder.set_df_laser_instructions()
+station_finder.calc_answer_part2()

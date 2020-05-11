@@ -14,7 +14,7 @@ class TestSuite(unittest.TestCase):
     def test_best_location_example1(self):
         station_finder = monotoring_station('Input/day10_part1_example.txt' )
         station_finder.find_best_station_location()
-        output = station_finder.best_location
+        output = station_finder.best_station_location
         expected_output = (3, 4)
         self.assertSequenceEqual(output, expected_output)
         
@@ -28,7 +28,7 @@ class TestSuite(unittest.TestCase):
     def test_best_location_example2(self):
         station_finder = monotoring_station('Input/day10_part1_example2.txt' )
         station_finder.find_best_station_location()
-        output = station_finder.best_location
+        output = station_finder.best_station_location
         expected_output = (5, 8)
         self.assertSequenceEqual(output, expected_output)
         
@@ -42,7 +42,7 @@ class TestSuite(unittest.TestCase):
     def test_best_location_example4(self):
         station_finder = monotoring_station('Input/day10_part1_example4.txt' )
         station_finder.find_best_station_location()
-        output = station_finder.best_location
+        output = station_finder.best_station_location
         expected_output = (11, 13)
         self.assertSequenceEqual(output, expected_output)
         
