@@ -51,7 +51,9 @@ class TestSuite(unittest.TestCase):
         station_finder.find_best_station_location()
         output = station_finder.N_visible_at_best_location
         expected_output = 210
-        self.assertEqual(output, expected_output)  
+        self.assertEqual(output, expected_output)
+
+    def test+
 
 if( __name__ == "__main__" ):
     unittest.main()

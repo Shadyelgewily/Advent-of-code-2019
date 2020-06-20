@@ -7,7 +7,9 @@ from Day4.class_password_generator import password_generator
 from Day6.class_orbits import orbits
 from Day8.class_image_decoder import image_decoder
 from Day10.class_monotoring_station import monotoring_station
+from Day12.class_solar_system import Solar_system
 
+"""
 masses_of_modules = Day1.read_masses_of_modules("Input/day1.txt" )
 answer_1a = Day1.calculate_fuel(masses_of_modules)
 answer_1b = Day1.calculate_fuel_partb(masses_of_modules)
@@ -47,3 +49,10 @@ station_finder.find_best_station_location()
 print(station_finder.N_visible_at_best_location) #part1
 station_finder.set_df_laser_instructions()
 station_finder.calc_answer_part2()
+"""
+
+#Day 12
+solar_system = Solar_system("Input/day12_part1_example.txt")
+solar_system.simulate_motion()
+answer_day12_part1 = solar_system.get_total_energy_in_system()
+print(answer_day12_part1)
